@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Online Store</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content%}
     <h1>Kili-Clone</h1>
     <form class="registration-form" action="/register/" method="post">
         <fieldset>
@@ -29,5 +25,4 @@
             </div>
         </fieldset>
     </form>
-</body>
-</html>
+{% endblock %}

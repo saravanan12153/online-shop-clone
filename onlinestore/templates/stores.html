@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Stores page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content%}
     {% for store in stores %}
     <div>
         <p>{{ store.store_name}}</p>
         <img src="{{store.picture}}" height='100' width='100'>
     </div>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
