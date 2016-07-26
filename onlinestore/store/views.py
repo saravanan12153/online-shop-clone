@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.template import RequestContext
 
 # Create your views here.
-# from models import Store, Product
+from models import Store
 from forms import RegistrationForm
 
 
@@ -56,3 +56,8 @@ class RegistrationView(IndexView):
                 '/register',
                 context_instance=RequestContext(request)
             )
+
+
+def storespage(request):
+    stores = Store.objects.all()
+    return render(request, 'stores.html', {'stores': stores})
