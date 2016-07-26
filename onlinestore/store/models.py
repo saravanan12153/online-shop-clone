@@ -18,9 +18,13 @@ class Store(models.Model):
     )
 
     store_name = models.CharField(max_length=250)
-    picture = models.ImageField(upload_to='/stores/')
+    picture = models.ImageField(upload_to='stores/')
     store_type = models.CharField(max_length=25, choices=STORE_TYPE_CHOICES,)
     owner = models.ForeignKey(User)
+
+    def __unicode__(self):
+        """Display string representation of storename."""
+        return self.store_name
 
 
 class Product(models.Model):
@@ -29,4 +33,9 @@ class Product(models.Model):
     product_name = models.CharField(max_length=200)
     description = models.TextField(max_length=400)
     price = models.IntegerField()
-    picture = models.ImageField(upload_to='/products/')
+    picture = models.ImageField(upload_to='products/')
+    store = models.ForeignKey(Store)
+
+    def __unicode__(self):
+        """Display string representation of a product name."""
+        return self.product_name
