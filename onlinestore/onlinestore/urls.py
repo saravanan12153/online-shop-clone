@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from store.views import IndexView, RegistrationView, storespage
+from store.views import IndexView, RegistrationView, storespage, LoginView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view()),
-    url(r'^register/', RegistrationView.as_view()),
+    url(r'^register/$', RegistrationView.as_view()),
+    url(r'^login/$', LoginView.as_view()),
     url(r'^stores/$', storespage),
 ]

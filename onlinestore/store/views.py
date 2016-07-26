@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 # Create your views here.
 from models import Store
-from forms import RegistrationForm
+from forms import RegistrationForm, LoginForm
 
 
 class IndexView(TemplateView):
@@ -54,6 +54,33 @@ class RegistrationView(IndexView):
                 messages.add_message(request, messages.ERROR, error[0])
             return redirect(
                 '/register',
+                context_instance=RequestContext(request)
+            )
+
+
+class LoginView(IndexView):
+
+    form_class = LoginForm
+
+    def post(self, request, **kwargs):
+        """Handle user login."""
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            current_user = authenticate(
+                username=request.POST['username'],
+                password=request.POST['password'])
+            login(request, current_user)
+            messages.success(
+                request, 'Welcome back!!')
+            return redirect(
+                '/stores',
+                context_instance=RequestContext(request)
+            )
+        else:
+            messages.error(
+                request, 'Incorrect username or password.')
+            return redirect(
+                '/login',
                 context_instance=RequestContext(request)
             )
 

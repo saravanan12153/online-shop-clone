@@ -49,3 +49,12 @@ class RegistrationForm(forms.Form):
             password=self.cleaned_data['password']
         )
         return new_user
+
+
+class LoginForm(forms.Form):
+    """Define form for user login."""
+
+    username = forms.CharField(widget=forms.TextInput(
+        attrs=dict(required=True, autocomplete='off')))
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs=dict(required=True)))
