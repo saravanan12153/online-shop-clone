@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 # Create your views here.
 from models import Store
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, StoreForm
 
 
 class IndexView(TemplateView):
@@ -88,3 +88,16 @@ class LoginView(IndexView):
 def storespage(request):
     stores = Store.objects.all()
     return render(request, 'stores.html', {'stores': stores})
+
+
+def add_store(request):
+    if request.method == "POST":
+        form = StoreForm(request.POST)
+        if form.is_valid():
+            new_store = form.save(commit=False)
+            new_store.owner = request.user
+            new_store.save()
+            return redirect('/stores')
+    else:
+        form = StoreForm()
+    return render(request, 'stores.html', {'storeform': form})

@@ -2,14 +2,12 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
+from models import Store
+
 
 class RegistrationForm(forms.Form):
     """Define registration from based on User model,
     with validation on username and password fields."""
-
-    # class Meta:
-    # model = User
-    # fields = ('username', 'password',)
 
     username = forms.RegexField(regex=r'^[0-9a-zA-Z_]*$',
                                 max_length=30,
@@ -58,3 +56,8 @@ class LoginForm(forms.Form):
         attrs=dict(required=True, autocomplete='off')))
     password = forms.CharField(
         widget=forms.PasswordInput(attrs=dict(required=True)))
+
+
+class StoreForm(forms.ModelForm):
+    model = Store
+    fields = ('store_name', 'picture', 'store_type', )
