@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Store(models.Model):
@@ -19,3 +20,13 @@ class Store(models.Model):
     store_name = models.CharField(max_length=250)
     picture = models.ImageField(upload_to='/stores/')
     store_type = models.CharField(max_length=25, choices=STORE_TYPE_CHOICES,)
+    owner = models.ForeignKey(User)
+
+
+class Product(models.Model):
+    """Create base model for Products."""
+
+    product_name = models.CharField(max_length=200)
+    description = models.TextField(max_length=400)
+    price = models.IntegerField()
+    picture = models.ImageField(upload_to='/products/')
