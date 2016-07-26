@@ -1,6 +1,8 @@
-# from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-# from django.template import RequestContext
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.template import RequestContext
 
 # Create your views here.
 # from models import Store, Product
@@ -20,3 +22,37 @@ class IndexView(TemplateView):
         return context
 
 
+class RegistrationView(IndexView):
+
+    form_class = RegistrationForm
+
+    def post(self, request, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # save form data to the database
+            new_user = form.save()
+
+            # hash the password passed
+            new_user.set_password(request.POST['password'])
+            new_user.save()
+
+            # authenticate new_user details and log them in
+            new_user = authenticate(
+                username=request.POST['username'],
+                password=request.POST['password'])
+            login(request, new_user)
+            messages.success(
+                request, "You've been successfully registered!")
+            return redirect(
+                '/stores',
+                context_instance=RequestContext(request)
+            )
+        else:
+            messages.error(
+                request, 'Oops there was a problem on registration!')
+            for error in form.errors.values():
+                messages.add_message(request, messages.ERROR, error[0])
+            return redirect(
+                '/register',
+                context_instance=RequestContext(request)
+            )
