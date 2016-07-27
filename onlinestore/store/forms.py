@@ -59,5 +59,6 @@ class LoginForm(forms.Form):
 
 
 class StoreForm(forms.ModelForm):
-    model = Store
-    fields = ('store_name', 'picture', 'store_type', )
+    class Meta:
+        model = Store
+        fields = ('store_name', 'picture')

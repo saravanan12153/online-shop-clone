@@ -73,7 +73,7 @@ class LoginView(IndexView):
             messages.success(
                 request, 'Welcome back!!')
             return redirect(
-                '/stores',
+                '/stores/',
                 context_instance=RequestContext(request)
             )
         else:
@@ -85,19 +85,38 @@ class LoginView(IndexView):
             )
 
 
-def storespage(request):
-    stores = Store.objects.all()
-    return render(request, 'stores.html', {'stores': stores})
+class AddStore(TemplateView):
+    """View for creation on a new store and viewing all stores."""
 
+    template_name = 'stores.html'
+    form_class = StoreForm
 
-def add_store(request):
-    if request.method == "POST":
-        form = StoreForm(request.POST)
+    def get_context_data(self, **kwargs):
+        """Return dictionary representing passed in context."""
+        context = super(AddStore, self).get_context_data(**kwargs)
+        context['stores'] = Store.objects.filter(
+            owner=self.request.user)
+        context['username'] = self.request.user.username
+        context['addstoreform'] = StoreForm()
+        return context
+
+    def post(self, request, **kwargs):
+        form = self.form_class(request.POST)
+        # import ipdb; ipdb.set_trace()
         if form.is_valid():
             new_store = form.save(commit=False)
-            new_store.owner = request.user
+            new_store.owner = self.request.user.username
             new_store.save()
-            return redirect('/stores')
-    else:
-        form = StoreForm()
-    return render(request, 'stores.html', {'storeform': form})
+            messages.success(
+                request, 'New Store added successfully!')
+            return redirect(
+                '/stores/',
+                context_instance=RequestContext(request)
+            )
+        else:
+            messages.error(
+                request, 'Error at creation!')
+            return redirect(
+                '/stores/',
+                context_instance=RequestContext(request)
+            )

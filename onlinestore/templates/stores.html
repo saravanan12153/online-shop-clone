@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} flash-message" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    <div>
+        <form role="form" action="/stores/" method="post">
+            <fieldset>
+                {% csrf_token %}
+                {{ addstoreform.as_p }}
+                <div class="form-group">
+                 <button type="submit" class="btn btn-primary" value="Add">Add Store</button>
+               </div>
+            </fieldset>
+        </form>
+    </div>
     {% for store in stores %}
     <div>
         <p>{{ store.store_name}}</p>
         <img src="/media/{{store.picture}}" height='100' width='100'>
-        <form>
-            {{ storeform }}
-        </form>
     </div>
     {% endfor %}
 {% endblock %}
