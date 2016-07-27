@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.template import RequestContext
 
 # Create your views here.
-from models import Store
+from models import Store, Product
 from forms import RegistrationForm, LoginForm, StoreForm
 
 
@@ -120,3 +120,16 @@ class AddStore(TemplateView):
                 '/stores/',
                 context_instance=RequestContext(request)
             )
+
+
+class ProductsView(IndexView):
+    """View for addition and viewing all products in a store."""
+
+    template_name = 'products.html'
+
+    def get_context_data(self, **kwargs):
+        """Pass in data in a dictionary to the template view."""
+        context = super(ProductsView, self).get_context_data(**kwargs)
+        context['store'] = Store.objects.get(id=kwargs['pk'])
+        context['products'] = Product.objects.filter(store=kwargs['pk'])
+        return context

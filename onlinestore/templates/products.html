@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content%}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} flash-message" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    <div>
+        {% if products %}
+        <p>Products currently in {{store.store_name}}</p>
+        {% for product in products %}
+        <p>{{ product.product_name}}</p>
+        <img src="/media/{{product.picture}}" height='100' width='100'>
+        {% endfor %}
+        {% else %}
+        <p>No products currently in {{store.store_name}}</p>
+        {% endif %}
+    </div>
+
+{% endblock %}
