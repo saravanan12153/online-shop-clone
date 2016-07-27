@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from store.views import IndexView, RegistrationView, storespage, LoginView
+import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,4 +24,8 @@ urlpatterns = [
     url(r'^register/$', RegistrationView.as_view()),
     url(r'^login/$', LoginView.as_view()),
     url(r'^stores/$', storespage),
+    # media route
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT,
+    }),
 ]

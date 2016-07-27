@@ -3,7 +3,7 @@
     {% for store in stores %}
     <div>
         <p>{{ store.store_name}}</p>
-        <img src="{{store.picture}}" height='100' width='100'>
+        <img src="/media/{{store.picture}}" height='100' width='100'>
         <form>
             {{ storeform }}
         </form>
