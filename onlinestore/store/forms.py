@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
-from models import Store
+from models import Store, Product
 
 
 class RegistrationForm(forms.Form):
@@ -62,3 +62,9 @@ class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
         fields = ('store_name', 'picture')
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('product_name', 'description', 'price', 'picture', )

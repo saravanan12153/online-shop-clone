@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 # Create your views here.
 from models import Store, Product
-from forms import RegistrationForm, LoginForm, StoreForm
+from forms import RegistrationForm, LoginForm, StoreForm, ProductForm
 
 
 class IndexView(TemplateView):
@@ -101,8 +101,8 @@ class AddStore(TemplateView):
         return context
 
     def post(self, request, **kwargs):
-        form = self.form_class(request.POST)
-        # import ipdb; ipdb.set_trace()
+        """Method for creation of new store."""
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             new_store = form.save(commit=False)
             new_store.owner = self.request.user.username
@@ -122,14 +122,35 @@ class AddStore(TemplateView):
             )
 
 
-class ProductsView(IndexView):
+class ProductsView(TemplateView):
     """View for addition and viewing all products in a store."""
 
     template_name = 'products.html'
+    form_class = ProductForm
 
     def get_context_data(self, **kwargs):
         """Pass in data in a dictionary to the template view."""
         context = super(ProductsView, self).get_context_data(**kwargs)
         context['store'] = Store.objects.get(id=kwargs['pk'])
         context['products'] = Product.objects.filter(store=kwargs['pk'])
+        context['productform'] = ProductForm()
         return context
+
+    def post(self, request, **kwargs):
+        """Handle creation of a new product."""
+        form = self.form_class(request.POST, request.FILES)
+        store = Store.objects.get(id=kwargs['pk'])
+        if form.is_valid():
+            new_product = form.save(commit=False)
+            new_product.store = store
+            new_product.save()
+            messages.success(request, 'Product successfully added.')
+            return redirect(
+                '/stores/' + kwargs['pk'] + '/products/',
+                context_instance=RequestContext(request))
+        else:
+            messages.error(
+                request, 'Something went wrong. :-(')
+            return redirect(
+                '/stores/' + kwargs['pk'] + '/products/',
+                context_instance=RequestContext(request))
