@@ -1,0 +1,1 @@
+web: python onlinestore/manage.py migrate; gunicorn onlinestore.wsgi --log-file -
