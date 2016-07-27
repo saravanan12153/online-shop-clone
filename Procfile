@@ -1,1 +1,1 @@
-web: python onlinestore/manage.py migrate; gunicorn onlinestore.wsgi --pythonpath=onlinestore --log-file -
+web: gunicorn onlinestore.wsgi --pythonpath=onlinestore --log-file -
