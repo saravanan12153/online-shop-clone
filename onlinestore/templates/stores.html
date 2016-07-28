@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 {% block content%}
-    {% if messages %}
+    <div class="container">
+        {% if messages %}
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} flash-message" role="alert">
           {{ message }}
         </div>
         {% endfor %}
-    {% endif %}
-    <div>
-        <form role="form" action="/stores/" method="post" enctype="multipart/form-data">
-            <fieldset>
-                {% csrf_token %}
-                {{ addstoreform.as_p }}
-                <div class="form-group">
-                 <button type="submit" class="btn btn-primary" value="Add">Add Store</button>
-               </div>
-            </fieldset>
-        </form>
+        {% endif %}
+        <div>
+            <form role="form" action="/stores/" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    {% csrf_token %}
+                    {{ addstoreform.as_p }}
+                    <div class="form-group">
+                     <button type="submit" class="btn btn-primary" value="Add">Add Store</button>
+                   </div>
+                </fieldset>
+            </form>
+        </div>
+        {% for store in stores %}
+        <div>
+            <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
+            <img src="/media/{{store.picture}}" height='100' width='100'>
+        </div>
+        {% endfor %}
     </div>
-    {% for store in stores %}
-    <div>
-        <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
-        <img src="/media/{{store.picture}}" height='100' width='100'>
-    </div>
-    {% endfor %}
+
 {% endblock %}

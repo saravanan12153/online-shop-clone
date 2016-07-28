@@ -1,3 +1,15 @@
 .register {
     display: none;
 }
+
+.logo {
+    text-align: center;
+}
+
+#authenticate {
+    margin: 0 auto;
+}
+
+body {
+    background-color: #F5F8FA;
+}
