@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
 {% block content%}
     <div class="container">
-       {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} flash-message" role="alert">
-          {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
-        <div>
-            <div>
-                <form role="form" action="{% url  'all_products' pk=store.pk%}" method="post"enctype="multipart/form-data">
-                    <fieldset>
-                        {% csrf_token %}
-                        {{ productform.as_p }}
-                        <div class="form-group">
-                         <button type="submit" class="btn btn-primary" value="Add">Add Product</button>
-                       </div>
-                    </fieldset>
-                </form>
+        <div class="row">
+            <div class="col-sm-12">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} flash-message" role="alert">
+                      {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
             </div>
-            {% if products %}
-            <p>Products currently in {{store.store_name}}</p>
-            {% for product in products %}
-            <p>{{ product.product_name}}</p>
-            <img src="/media/{{product.picture}}" height='100' width='100'>
-            {% endfor %}
-            {% else %}
-            <p>No products currently in {{store.store_name}}</p>
-            {% endif %}
+            <div>
+                <div class="products-form">
+                    <form role="form" action="{% url  'all_products' pk=store.pk%}" method="post"enctype="multipart/form-data">
+                        <fieldset>
+                            {% csrf_token %}
+                            {{ productform.as_p }}
+                            <div class="form-group">
+                             <button type="submit" class="btn btn-primary" value="Add">Add Product</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                {% if products %}
+                   <p>Products currently in {{store.store_name}}</p>
+                    {% for product in products %}
+                        <div class="col s4" id="products">
+                            <p>{{ product.product_name}}</p>
+                            <img src="/media/{{product.picture}}" height='100' width='100'>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No products currently in {{store.store_name}}</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
