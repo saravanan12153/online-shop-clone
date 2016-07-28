@@ -105,7 +105,7 @@ class AddStore(TemplateView):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             new_store = form.save(commit=False)
-            new_store.owner = self.request.user.username
+            new_store.owner = self.request.user
             new_store.save()
             messages.success(
                 request, 'New Store added successfully!')
