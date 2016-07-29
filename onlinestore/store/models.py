@@ -14,7 +14,7 @@ class Store(models.Model):
         ('furniture', 'Furniture'),
         ('electronics', 'Electronics'),
         ('beauty', 'Beauty'),
-        ('', 'No category set'),
+        ('No category set', ''),
     )
 
     store_name = models.CharField(max_length=250)

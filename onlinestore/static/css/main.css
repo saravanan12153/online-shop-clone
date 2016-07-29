@@ -13,3 +13,16 @@
 body {
     background-color: #F5F8FA;
 }
+
+/*.card-image {
+    max-height: 75% !important;
+}
+
+.card-content {
+    max-height: 25% !important;
+    padding: 10px !important;
+}*/
+
+img {
+    object-fit: contain;
+}

@@ -23,10 +23,13 @@
                 </form>
             </div>
             {% for store in stores %}
-            <div id="stores" class="col s4" >
+            <div id="stores" class="col s12 m4" >
+                <img src="/media/{{store.picture}}" height="100" width="100">
                 <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
-                <img src="/media/{{store.picture}}" height='100' width='100'>
+                <p>Category: {{store.store_type}}</p>
             </div>
+
+
             {% endfor %}
         </div>
     </div>

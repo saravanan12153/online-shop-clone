@@ -26,10 +26,24 @@
                 {% if products %}
                    <p>Products currently in {{store.store_name}}</p>
                     {% for product in products %}
-                        <div class="col s4" id="products">
-                            <p>{{ product.product_name}}</p>
-                            <img src="/media/{{product.picture}}" height='100' width='100'>
+                    <div class="card horizontal col s12 m4">
+                        <div class="card-image">
+                            <img class="activator" src="/media/{{product.picture}}">
                         </div>
+                        <div class="card-stacked">
+                            <div class="card-content center-align">
+                                <p>{{ product.product_name}}</p>
+                                <p>Entails: {{ product.description }}</p>
+                            </div>
+                            <div class="card-action">
+                            <a href="#">This is a link</a>
+                            </div>
+                            <div class="card-reveal">
+                              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
                 {% else %}
                     <p>No products currently in {{store.store_name}}</p>
