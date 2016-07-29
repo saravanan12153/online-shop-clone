@@ -128,6 +128,7 @@ class StoreEditsView(TemplateView):
     def post(self, request, **kwargs):
         store = Store.objects.filter(id=kwargs['pk']).first()
         store.store_name = request.POST.get('name')
+        store.picture = request.POST.get('picture')
         store.save()
         messages.success(request, 'Store name successfully updated.')
         return redirect(
@@ -167,3 +168,19 @@ class ProductsView(TemplateView):
             return redirect(
                 '/stores/' + kwargs['pk'] + '/products/',
                 context_instance=RequestContext(request))
+
+
+class ProductEditsView(TemplateView):
+    """Handle edition of stores created."""
+
+    def post(self, request, **kwargs):
+        product = Product.objects.filter(
+            id=kwargs['pk'], store=kwargs['store_id']).first()
+        product.product_name = request.POST.get('name')
+        product.description = request.POST.get('description')
+        product.picture = request.POST.get('picture')
+        product.save()
+        messages.success(request, 'Product name successfully updated.')
+        return redirect(
+            '/stores/' + kwargs['store_id'] + '/products/',
+            context_instance=RequestContext(request))

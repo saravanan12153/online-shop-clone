@@ -36,12 +36,40 @@
                                 <p>Entails: {{ product.description }}</p>
                             </div>
                             <div class="card-action">
-                            <a href="#">This is a link</a>
+                            <a data-action="/stores/{{store.id}}/products/{{product.id}}/" href="#modal{{product.id}}"  class="modal-trigger" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             </div>
                             <div class="card-reveal">
                               <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                               <p>Here is some more information about this product that is only revealed once clicked on.</p>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit existing product modal -->
+                    <div id="modal{{product.id}}" class="modal" role="dialog">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                              <h4 class="modal-title" id="myModalLabel">Edit Product Name</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="storeeditsform">
+                                <form role="form" action="/stores/{{store.id}}/products/{{product.id}}/"method="post">
+                                  <fieldset>
+                                    {% csrf_token %}
+                                    <input type="text" name="name" value="{{ product.product_name }}" required="True">
+                                    <input type="text" name="description" value="{{ product.description }}">
+                                    <input type="file" name="picture" value="{{ product.picture }}">
+                                    <input type="submit" value="Update" class="btn btn-primary">
+                                    <button type="button" class="btn modal-action modal-close">Cancel</button>
+                                  </fieldset>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </div>
                     {% endfor %}

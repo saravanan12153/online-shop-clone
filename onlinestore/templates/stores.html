@@ -37,7 +37,7 @@
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
-                      <h4 class="modal-title" id="myModalLabel">Edit Bucketlist Name</h4>
+                      <h4 class="modal-title" id="myModalLabel">Edit Store Name</h4>
                     </div>
                     <div class="modal-body">
                       <div class="storeeditsform">
@@ -45,9 +45,9 @@
                           <fieldset>
                             {% csrf_token %}
                             <input type="text" name="name" value="{{ store.store_name }}" required="True">
-                            <input type="file" name="picture">
+                            <input type="file" name="picture" value="{{ store.picture }}">
                             <input type="submit" value="Update" class="btn btn-primary">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" class="modal-action modal-close">Cancel</button>
                           </fieldset>
                         </form>
                       </div>
