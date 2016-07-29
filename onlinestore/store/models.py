@@ -34,7 +34,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=200)
     description = models.TextField(max_length=400)
     price = models.IntegerField()
-    picture = models.ImageField(upload_to='products/')
+    picture = models.ImageField(upload_to='products/', default='img/nopic.png')
     store = models.ForeignKey(Store)
 
     def __unicode__(self):
