@@ -26,10 +26,35 @@
             <div id="stores" class="col s12 m4" >
                 <img src="/media/{{store.picture}}" height="100" width="100">
                 <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
-                <p>Category: {{store.store_type}}</p>
+                <a data-action="/stores/{{store.id}}/edit/" href="#modal{{store.id}}"  class="modal-trigger" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
             </div>
 
-
+            <!-- Edit existing store modal -->
+            <div id="modal{{store.id}}" class="modal" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">Edit Bucketlist Name</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="storeeditsform">
+                        <form role="form" action="/stores/{{store.id}}/edit/" method="post">
+                          <fieldset>
+                            {% csrf_token %}
+                            <input type="text" name="name" value="{{ store.store_name }}" required="True">
+                            <input type="file" name="picture">
+                            <input type="submit" value="Update" class="btn btn-primary">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                          </fieldset>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>

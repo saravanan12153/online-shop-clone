@@ -122,6 +122,19 @@ class AddStore(TemplateView):
             )
 
 
+class StoreEditsView(TemplateView):
+    """Handle edition of stores created."""
+
+    def post(self, request, **kwargs):
+        store = Store.objects.filter(id=kwargs['pk']).first()
+        store.store_name = request.POST.get('name')
+        store.save()
+        messages.success(request, 'Store name successfully updated.')
+        return redirect(
+            '/stores/',
+            context_instance=RequestContext(request))
+
+
 class ProductsView(TemplateView):
     """View for addition and viewing all products in a store."""
 

@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from store.views import IndexView, RegistrationView, LoginView, AddStore, ProductsView
+from store.views import IndexView, RegistrationView, LoginView, AddStore, \
+    ProductsView, StoreEditsView
 import settings
 
 urlpatterns = [
@@ -25,6 +26,8 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view()),
     # url(r'^stores/$', storespage),
     url(r'^stores/$', AddStore.as_view()),
+    url(r'^stores/(?P<pk>[0-9]+)/edit/$',
+        StoreEditsView.as_view(), name='edit_stores'),
     url(r'^stores/(?P<pk>[0-9]+)/products/$',
         ProductsView.as_view(), name="all_products"),
     # media route

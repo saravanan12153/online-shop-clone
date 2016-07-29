@@ -14,11 +14,12 @@ class Store(models.Model):
         ('furniture', 'Furniture'),
         ('electronics', 'Electronics'),
         ('beauty', 'Beauty'),
-        ('No category set', ''),
+        ('', 'No category set'),
     )
 
     store_name = models.CharField(max_length=250)
-    picture = models.ImageField(upload_to='stores/')
+    picture = models.ImageField(
+        upload_to='stores/', default='static/img/nopic.png')
     store_type = models.CharField(max_length=25, choices=STORE_TYPE_CHOICES,)
     owner = models.ForeignKey(User)
 

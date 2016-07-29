@@ -10,6 +10,8 @@ var main = function(){
             $(".register").show();
             $(".login").hide();
         });
+
+    $('.modal-trigger').leanModal();
 };
 
 $(document).ready(main);
