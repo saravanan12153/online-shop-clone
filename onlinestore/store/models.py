@@ -19,7 +19,7 @@ class Store(models.Model):
 
     store_name = models.CharField(max_length=250)
     picture = models.ImageField(
-        upload_to='stores/', default='static/img/nopic.png')
+        upload_to='stores/', default='img/nopic.png')
     store_type = models.CharField(max_length=25, choices=STORE_TYPE_CHOICES,)
     owner = models.ForeignKey(User)
 
