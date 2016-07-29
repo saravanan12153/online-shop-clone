@@ -136,6 +136,19 @@ class StoreEditsView(TemplateView):
             context_instance=RequestContext(request))
 
 
+class StoreDeleteView(TemplateView):
+    """Handle store deletion."""
+
+    def get(self, request, **kwargs):
+        """Handle store deletion."""
+        store = Store.objects.filter(id=kwargs['pk']).first()
+        store.delete()
+        messages.success(request, 'Store deleted.')
+        return redirect(
+            '/stores/',
+            context_instance=RequestContext(request))
+
+
 class ProductsView(TemplateView):
     """View for addition and viewing all products in a store."""
 
@@ -181,6 +194,20 @@ class ProductEditsView(TemplateView):
         product.picture = request.POST.get('picture')
         product.save()
         messages.success(request, 'Product name successfully updated.')
+        return redirect(
+            '/stores/' + kwargs['store_id'] + '/products/',
+            context_instance=RequestContext(request))
+
+
+class ProductDeleteView(TemplateView):
+    """Handle product deletion."""
+
+    def get(self, request, **kwargs):
+        """Handle product deletion."""
+        product = Product.objects.filter(
+            id=kwargs['pk'], store=kwargs['store_id']).first()
+        product.delete()
+        messages.success(request, 'Store deleted.')
         return redirect(
             '/stores/' + kwargs['store_id'] + '/products/',
             context_instance=RequestContext(request))

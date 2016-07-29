@@ -27,6 +27,7 @@
                 <img src="/media/{{store.picture}}" height="100" width="100">
                 <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
                 <a data-action="/stores/{{store.id}}/edit/" href="#modal{{store.id}}"  class="modal-trigger" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#deletemodal" class="modal-trigger"><i class="fa fa-trash"></i></a>
             </div>
 
             <!-- Edit existing store modal -->
@@ -34,7 +35,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="modal-close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                       <h4 class="modal-title" id="myModalLabel">Edit Store Name</h4>
@@ -45,12 +46,32 @@
                           <fieldset>
                             {% csrf_token %}
                             <input type="text" name="name" value="{{ store.store_name }}" required="True">
-                            <input type="file" name="picture" value="{{ store.picture }}">
                             <input type="submit" value="Update" class="btn btn-primary">
                             <button type="button" class="btn btn-danger" class="modal-action modal-close">Cancel</button>
                           </fieldset>
                         </form>
                       </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!--Delete store modal-->
+            <div id="deletemodal" class="modal" role ="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="modal-close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">Delete Store</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Are you sure?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default modal-action modal-close">Cancel</button>
+                    <a href="/stores/{{store.id}}/delete/" class="btn btn-danger modal-delete-btn">Delete</a>
                     </div>
                   </div>
                 </div>

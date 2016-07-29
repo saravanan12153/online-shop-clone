@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from store.views import IndexView, RegistrationView, LoginView, AddStore, \
-    ProductsView, StoreEditsView, ProductEditsView
+    ProductsView, StoreEditsView, ProductEditsView, StoreDeleteView, \
+    ProductDeleteView
 import settings
 
 urlpatterns = [
@@ -28,10 +29,14 @@ urlpatterns = [
     url(r'^stores/$', AddStore.as_view()),
     url(r'^stores/(?P<pk>[0-9]+)/edit/$',
         StoreEditsView.as_view(), name='edit_stores'),
+    url(r'^stores/(?P<pk>[0-9]+)/delete/$',
+        StoreDeleteView.as_view(), name='delete_stores'),
     url(r'^stores/(?P<pk>[0-9]+)/products/$',
         ProductsView.as_view(), name="all_products"),
-    url(r'stores/(?P<store_id>[0-9]+)/products/(?P<pk>[0-9]+)/$',
+    url(r'stores/(?P<store_id>[0-9]+)/products/(?P<pk>[0-9]+)/edit/$',
         ProductEditsView.as_view(), name="edit_product"),
+    url(r'stores/(?P<store_id>[0-9]+)/products/(?P<pk>[0-9]+)/delete/$',
+        ProductDeleteView.as_view(), name="delete_product"),
     # media route
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.MEDIA_ROOT,
