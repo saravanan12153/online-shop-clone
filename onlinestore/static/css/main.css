@@ -6,6 +6,15 @@
     text-align: center;
 }
 
+.brand-logo {
+    font-family: 'Montez';
+    color: #0097A7;
+    font-size: 5rem;
+    font-weight: bold;
+    margin-top: auto;
+    margin-left: 30px;
+}
+
 #authenticate {
     margin: 0 auto;
 }
@@ -14,20 +23,12 @@ body {
     background-color: #F5F8FA;
 }
 
-/*.card-image {
-    max-height: 75% !important;
-}
-
-.card-content {
-    max-height: 25% !important;
-    padding: 10px !important;
-}*/
 
 img {
     object-fit: contain;
 }
 
-.storesform {
+.storesform , .products-form{
     margin-bottom: 20px;
     margin-top: 20px;
 }
