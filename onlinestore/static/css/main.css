@@ -36,3 +36,7 @@ img {
 #stores, #products {
     border: 0.2px dotted;
 }
+
+.back-navigation {
+    text-decoration: underline;
+}

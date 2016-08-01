@@ -15,6 +15,9 @@
                 {% endif %}
             </div>
             <div>
+                <div class="back-navigation">
+                  <a href="/stores"><p>Back to all stores</p></a>
+                </div>
                 <div class="products-form">
                     <form role="form" action="{% url  'all_products' pk=store.pk%}" method="post"enctype="multipart/form-data">
                         <fieldset>
