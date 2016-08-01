@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout as auth_logout
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -211,3 +212,9 @@ class ProductDeleteView(TemplateView):
         return redirect(
             '/stores/' + kwargs['store_id'] + '/products/',
             context_instance=RequestContext(request))
+
+
+def logout(request):
+    """Log user out of the system."""
+    auth_logout(request)
+    return redirect('/')

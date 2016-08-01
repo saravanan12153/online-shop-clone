@@ -37,6 +37,7 @@ urlpatterns = [
         ProductEditsView.as_view(), name="edit_product"),
     url(r'stores/(?P<store_id>[0-9]+)/products/(?P<pk>[0-9]+)/delete/$',
         ProductDeleteView.as_view(), name="delete_product"),
+    url(r'^logout/$', 'store.views.logout'),
     # media route
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.MEDIA_ROOT,
