@@ -33,7 +33,6 @@ img {
     margin-top: 20px;
 }
 
-#stores {
-
+#stores, #products {
     border: 0.2px dotted;
 }
