@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block navbar %}
+  {% include "partials/navbar.html" %}
+{% endblock%}
 {% block content%}
     <div class="container">
         <div class="row">
@@ -81,7 +84,7 @@
                               <button type="button" class="modal-close" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
-                              <h4 class="modal-title" id="myModalLabel">Delete Product</h4>
+                              <h4 class="modal-title" id="myModalLabel">Delete Product {{product.product_name}}</h4>
                             </div>
                             <div class="modal-body">
                                 <h6>Are you sure?</h6>
