@@ -26,3 +26,13 @@ body {
 img {
     object-fit: contain;
 }
+
+.storesform {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#stores {
+
+    border: 0.2px dotted;
+}

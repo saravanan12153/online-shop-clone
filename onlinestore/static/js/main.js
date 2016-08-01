@@ -12,6 +12,7 @@ var main = function(){
         });
 
     $('.modal-trigger').leanModal();
+    $(".button-collapse").sideNav();
 };
 
 $(document).ready(main);
