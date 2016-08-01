@@ -6,7 +6,7 @@
     text-align: center;
 }
 
-.brand-logo {
+.brand-logo, h1 {
     font-family: 'Montez';
     color: #0097A7;
     font-size: 5rem;
