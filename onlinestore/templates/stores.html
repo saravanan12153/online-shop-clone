@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block navbar %}
+  {% include "partials/navbar.html" %}
+{% endblock%}
+{% block content%}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} flash-message" role="alert">
+                  {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="storesform">
+                <form role="form" action="/stores/" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        {% csrf_token %}
+                        {{ addstoreform.as_p }}
+                        <div class="form-group">
+                         <button type="submit" class="btn btn-primary" value="Add">Add Store</button>
+                       </div>
+                    </fieldset>
+                </form>
+            </div>
+            {% for store in stores %}
+            <div id="stores" class="col s12 m4" >
+                <img src="/media/{{store.picture}}" height="100" width="100">
+                <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
+                <a data-action="/stores/{{store.id}}/edit/" href="#modal{{store.id}}"  class="modal-trigger" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#deletemodal" class="modal-trigger"><i class="fa fa-trash"></i></a>
+            </div>
+
+            <!-- Edit existing store modal -->
+            <div id="modal{{store.id}}" class="modal" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="modal-close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">Edit Store Name</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="storeeditsform">
+                        <form role="form" action="/stores/{{store.id}}/edit/" method="post">
+                          <fieldset>
+                            {% csrf_token %}
+                            <input type="text" name="name" value="{{ store.store_name }}" required="True">
+                            <input type="submit" value="Update" class="btn btn-primary">
+                            <button type="button" class="btn btn-danger" class="modal-action modal-close">Cancel</button>
+                          </fieldset>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!--Delete store modal-->
+            <div id="deletemodal" class="modal" role ="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="modal-close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">Delete Store {{store.store_name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Are you sure?</h6>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default modal-action modal-close">Cancel</button>
+                      <a href="/stores/{{store.id}}/delete/" class="btn btn-danger modal-delete-btn">Delete</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

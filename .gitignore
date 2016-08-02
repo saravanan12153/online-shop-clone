@@ -1,4 +1,10 @@
+#system generated files
 env
 *.DS_Store
 *.pyc
 __pycache__
+
+# App generated files
+media/products/
+media/stores/
+staticfiles/

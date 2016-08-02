@@ -1,0 +1,1 @@
+web: gunicorn onlinestore.wsgi --pythonpath=onlinestore --log-file -

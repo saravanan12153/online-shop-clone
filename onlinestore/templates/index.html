@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col s12" id="authenticate">
+            <h1 class="logo">KilliClone</h1>
+            <div class="col-sm-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} flash-message" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="register">
+                <form class="registration-form" action="/register/" method="post">
+                    <fieldset>
+                        {% csrf_token %}
+                        <div class="input-field">
+                            {{ registrationform.username }}
+                            <label for="Username">Username</label>
+                            <div class="errors">{{ registrationform.errors }}</div>
+                        </div>
+                        <div class="input-field">
+                            {{ registrationform.password }}
+                            <label for="Password">Password</label>
+                            <div class="errors">{{ registrationform.errors }}</div>
+                        </div>
+                        <div class="input-field">
+                            {{ registrationform.confirm_password }}
+                            <label for="Confirm Password">Confirm Password</label>
+                            <div class="errors">{{ registrationform.errors }}</div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Register</button>
+                            <p id="loginlink">Already registered? <a href="#">Login</a></p>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="login">
+                <form action="/login/" method="post">
+                    <fieldset>
+                        {% csrf_token %}
+                        <div class="input-field">
+                            {{ registrationform.username }}
+                            <label for="Username">Username</label>
+                            <div class="errors">{{ registrationform.errors }}</div>
+                        </div>
+                        <div class="input-field">
+                            {{ registrationform.password }}
+                            <label for="Password">Password</label>
+                            <div class="errors">{{ registrationform.errors }}</div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Login</button>
+                            <p id="registerlink">Not Registered? <a href="#">Create account</a></p>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

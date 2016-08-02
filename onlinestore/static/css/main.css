@@ -1,0 +1,42 @@
+.register {
+    display: none;
+}
+
+.logo {
+    text-align: center;
+}
+
+.brand-logo, h1 {
+    font-family: 'Montez';
+    color: #0097A7;
+    font-size: 5rem;
+    font-weight: bold;
+    margin-top: auto;
+    margin-left: 30px;
+}
+
+#authenticate {
+    margin: 0 auto;
+}
+
+body {
+    background-color: #F5F8FA;
+}
+
+
+img {
+    object-fit: contain;
+}
+
+.storesform , .products-form{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#stores, #products {
+    border: 0.2px dotted;
+}
+
+.back-navigation {
+    text-decoration: underline;
+}
