@@ -11,6 +11,7 @@ class RegistrationForm(forms.Form):
 
     username = forms.RegexField(regex=r'^[0-9a-zA-Z_]*$',
                                 max_length=30,
+                                min_length=4,
                                 widget=forms.TextInput(attrs=dict(
                                     required=True,
                                     render_value=False)),
