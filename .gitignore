@@ -5,6 +5,6 @@ env
 __pycache__
 
 # App generated files
-media/products/
-media/stores/
+onlinestore/media/products/
+onlinestore/media/stores/
 staticfiles/
