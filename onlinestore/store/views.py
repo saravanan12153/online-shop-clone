@@ -19,7 +19,7 @@ class IndexView(TemplateView):
         """Return dictionary representing passed in context."""
         context = super(IndexView, self).get_context_data(**kwargs)
         context['registrationform'] = RegistrationForm()
-        # context['loginform'] = LoginForm()
+        context['loginform'] = LoginForm()
         return context
 
 
@@ -127,7 +127,7 @@ class StoreEditsView(TemplateView):
     """Handle edition of stores created."""
 
     def post(self, request, **kwargs):
-        store = Store.objects.filter(id=kwargs['pk']).first()
+        store = Store.objects.filter(id=kwargs['pk'], owner=self.request.user).first()
         store.store_name = request.POST.get('name')
         store.picture = request.POST.get('picture')
         store.save()

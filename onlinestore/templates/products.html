@@ -33,7 +33,11 @@
                    <p>Products currently in {{store.store_name}}</p>
                     {% for product in products %}
                     <div id="stores" class="col s12 m4" >
-                        <img src="/media/{{product.picture}}" height="100" width="100">
+                        {% if product.picture %}
+                          <img src="/media/{{product.picture}}" height="100" width="100">
+                        {% else %}
+                          <img src="/static/img/nopic.png" height="100" width="100">
+                        {% endif %}
                         <p>{{ product.product_name}}</p>
                         <a data-action="/stores/{{store.id}}/products/{{product.id}}/edit/" href="#modal{{product.id}}"  class="modal-trigger" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         <a data-action="/stores/{{store.id}}/products/{{product.id}}/delete/" href="#deleteproductmodal"  class="modal-trigger" ><i class="fa fa-trash" aria-hidden="true"></i></a>
