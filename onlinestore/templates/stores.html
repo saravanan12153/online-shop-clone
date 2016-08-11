@@ -34,8 +34,10 @@
                   <img src="/media/img/nopic.png" height="100" width="100">
                 {% endif %}
                 <p><a href="{% url  'all_products' pk=store.pk %}">{{ store.store_name}}</a></p>
+                {% if store.owner == request.user %}
                 <a data-action="/stores/{{store.id}}/edit/" href="#modal{{store.id}}"  class="modal-trigger" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
                 <a href="#deletemodal" class="modal-trigger"><i class="fa fa-trash"></i></a>
+                {% endif %}
             </div>
 
             <!-- Edit existing store modal -->

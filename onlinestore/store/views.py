@@ -95,8 +95,7 @@ class AddStore(TemplateView):
     def get_context_data(self, **kwargs):
         """Return dictionary representing passed in context."""
         context = super(AddStore, self).get_context_data(**kwargs)
-        context['stores'] = Store.objects.filter(
-            owner=self.request.user)
+        context['stores'] = Store.objects.all()
         context['username'] = self.request.user.username
         context['addstoreform'] = StoreForm()
         return context
@@ -127,7 +126,8 @@ class StoreEditsView(TemplateView):
     """Handle edition of stores created."""
 
     def post(self, request, **kwargs):
-        store = Store.objects.filter(id=kwargs['pk'], owner=self.request.user).first()
+        store = Store.objects.filter(id=kwargs['pk'],
+                                     owner=self.request.user).first()
         store.store_name = request.POST.get('name')
         store.picture = request.POST.get('picture')
         store.save()
